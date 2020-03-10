@@ -1,0 +1,216 @@
+{
+	"name": "CopyPipeline_vrb",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_vrb",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "movies"
+					},
+					{
+						"name": "Destination",
+						"value": "challange2//movies_from_cosmos"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "CosmosDbSqlApiSource",
+						"preferredRegions": []
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"redirectIncompatibleRowSettings": {
+						"linkedServiceName": {
+							"referenceName": "linkedService1_storageconnection",
+							"type": "LinkedServiceReference"
+						},
+						"path": "challange2"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['availabilityDate']"
+								},
+								"sink": {
+									"name": "availabilityDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['genre']"
+								},
+								"sink": {
+									"name": "genre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rating']"
+								},
+								"sink": {
+									"name": "rating",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['releaseYear']"
+								},
+								"sink": {
+									"name": "releaseYear",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['runtime']"
+								},
+								"sink": {
+									"name": "runtime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['streamingAvailabilityDate']"
+								},
+								"sink": {
+									"name": "streamingAvailabilityDate"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tier']"
+								},
+								"sink": {
+									"name": "tier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['title']"
+								},
+								"sink": {
+									"name": "title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_rid']"
+								},
+								"sink": {
+									"name": "_rid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_self']"
+								},
+								"sink": {
+									"name": "_self",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_etag']"
+								},
+								"sink": {
+									"name": "_etag",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_attachments']"
+								},
+								"sink": {
+									"name": "_attachments",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['_ts']"
+								},
+								"sink": {
+									"name": "_ts",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Column_1']"
+								},
+								"sink": {
+									"name": "unknown"
+								}
+							}
+						],
+						"collectionReference": "$['actors']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_vrb",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_vrb",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_fyx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HackerGroup5Lake_Connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Movies",
+				"fileSystem": "challange2"
+			},
+			"compressionCodec": "snappy"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
